@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter de Enfermagem no WhatsApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EFEAE1;
+    --ink:#1E2A28;
+    --ink-soft:#4A5654;
+    --teal:#2F5D50;
+    --teal-deep:#1E3E35;
+    --amber:#C97A3D;
+    --line:#D7D0C2;
+    --white:#FBFAF7;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  header{
+    padding:32px 0 0;
+  }
+  .wordmark{
+    font-family:var(--serif);
+    font-size:20px;
+    font-weight:600;
+    color:var(--teal-deep);
+    letter-spacing:0.01em;
+  }
+
+  main{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+    align-items:start;
+    padding:56px 0 40px;
+  }
+
+  h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(34px, 4.4vw, 54px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+    max-width:14ch;
+    color:var(--teal-deep);
+  }
+
+  .lede{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:0 0 36px;
+  }
+
+  .benefits{
+    list-style:none;
+    margin:0 0 8px;
+    padding:0;
+    border-top:1px solid var(--line);
+  }
+  .benefits li{
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    gap:16px;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .benefits li strong{
+    color:var(--ink);
+    font-weight:600;
+    flex:0 0 auto;
+  }
+
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:36px;
+    position:sticky;
+    top:32px;
+  }
+  .card h2{
+    font-family:var(--serif);
+    font-size:22px;
+    font-weight:500;
+    margin:0 0 6px;
+    color:var(--teal-deep);
+  }
+  .card p.sub{
+    margin:0 0 24px;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  form{display:flex; flex-direction:column; gap:14px;}
+
+  label{
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .field{display:flex; flex-direction:column; gap:6px;}
+
+  input[type=text], input[type=tel], select{
+    font-family:var(--sans);
+    font-size:15px;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:var(--bg);
+    color:var(--ink);
+  }
+  input:focus, select:focus{
+    outline:2px solid var(--teal);
+    outline-offset:1px;
+    background:var(--white);
+  }
+
+  /* honeypot - escondido de humanos, visível a bots simples */
+  .hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+
+  button{
+    margin-top:8px;
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:15px;
+    color:var(--white);
+    background:var(--teal);
+    border:none;
+    border-radius:3px;
+    padding:13px 18px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  button:hover{background:var(--teal-deep);}
+  button:disabled{background:#9AAFA9; cursor:default;}
+
+  .privacy{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:14px;
+    line-height:1.5;
+  }
+
+  .status{
+    margin-top:16px;
+    font-size:14px;
+    padding:12px 14px;
+    border-radius:3px;
+    display:none;
+  }
+  .status.ok{
+    display:block;
+    background:#E6EEE9;
+    color:var(--teal-deep);
+    border:1px solid #BFD6C9;
+  }
+  .status.err{
+    display:block;
+    background:#F6E9E1;
+    color:#8A3E1B;
+    border:1px solid #E3C2AC;
+  }
+
+  footer{
+    padding:32px 0 48px;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:820px){
+    main{grid-template-columns:1fr; gap:36px; padding-top:36px;}
+    .card{position:static;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="wordmark">Plantão&nbsp;Notícia</div>
+  </header>
+
+  <main>
+    <div>
+      <h1>Conteúdo de enfermagem, direto no seu WhatsApp.</h1>
+      <p class="lede">
+        Atualizações, protocolos e vagas resumidos por quem entende da área —
+        sem precisar abrir mais um app ou seguir mais uma página.
+      </p>
+
+      <ul class="benefits">
+        <li><strong>O quê</strong> Resumos curtos de diretrizes, protocolos e novidades da categoria, direto na sua conversa do WhatsApp.</li>
+        <li><strong>Frequência</strong> Poucas mensagens por semana — pensadas pra ler em um intervalo do plantão.</li>
+        <li><strong>Controle</strong> Você escolhe sua especialidade e cancela quando quiser, a qualquer momento.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Quero receber</h2>
+      <p class="sub">Leva menos de um minuto.</p>
+
+      <form id="leadForm" novalidate>
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="whatsapp">WhatsApp (com DDD)</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 91234-5678" autocomplete="tel" required>
+        </div>
+
+        <div class="field">
+          <label for="especialidade">Área de atuação</label>
+          <select id="especialidade" name="especialidade" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>Enfermagem geral</option>
+            <option>UTI</option>
+            <option>Obstetrícia</option>
+            <option>Pediatria</option>
+            <option>Saúde da Família</option>
+            <option>Estudante de enfermagem</option>
+            <option>Gestão / Coordenação</option>
+            <option>Outra</option>
+          </select>
+        </div>
+
+        <!-- honeypot anti-spam -->
+        <div class="hp" aria-hidden="true">
+          <label for="website">Deixe em branco</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" id="submitBtn">Quero receber</button>
+
+        <div id="statusBox" class="status"></div>
+
+        <p class="privacy">
+          Seus dados são usados só pra envio do conteúdo. Você pode cancelar quando
+          quiser digitando <strong>SAIR</strong> no WhatsApp.
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    Plantão Notícia — conteúdo pensado por profissionais de enfermagem, pra profissionais de enfermagem.
+  </footer>
+</div>
+
+<script>
+  // Nada de URL ou chave aqui — o formulário só fala com /api/subscribe,
+  // que roda no servidor (Vercel) e guarda as credenciais como variáveis de ambiente.
+
+  const form = document.getElementById("leadForm");
+  const btn = document.getElementById("submitBtn");
+  const statusBox = document.getElementById("statusBox");
+
+  function showStatus(type, msg){
+    statusBox.className = "status " + type;
+    statusBox.textContent = msg;
+  }
+
+  function normalizePhone(v){
+    return v.replace(/\D/g, "");
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // honeypot: se preenchido, é bot — finge sucesso e não envia nada
+    if (document.getElementById("website").value) {
+      showStatus("ok", "Cadastro recebido! Fique de olho no seu WhatsApp.");
+      form.reset();
+      return;
+    }
+
+    const nome = document.getElementById("nome").value.trim();
+    const whatsappRaw = document.getElementById("whatsapp").value.trim();
+    const especialidade = document.getElementById("especialidade").value;
+    const whatsapp = normalizePhone(whatsappRaw);
+
+    if (!nome || whatsapp.length < 10 || !especialidade) {
+      showStatus("err", "Confira nome, WhatsApp (com DDD) e área de atuação.");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
+
+    let ok = false;
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, whatsapp, especialidade })
+      });
+      ok = res.ok;
+    } catch (err) {
+      console.error(err);
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Quero receber";
+
+    if (!ok) {
+      showStatus("err", "Não foi possível concluir o cadastro. Tente novamente em instantes.");
+      return;
+    }
+
+    showStatus("ok", "Cadastro recebido! Fique de olho no seu WhatsApp para confirmar.");
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
