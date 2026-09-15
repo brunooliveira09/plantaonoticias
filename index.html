@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Newsletter de Enfermagem no WhatsApp</title>
+<title>Newsletter | Plantão Notícias</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -202,7 +202,7 @@
 
 <div class="wrap">
   <header>
-    <div class="wordmark">Plantão&nbsp;Notícia</div>
+    <div class="wordmark">Newsletter | Plantão Notícias</div>
   </header>
 
   <main>
@@ -232,7 +232,7 @@
 
         <div class="field">
           <label for="whatsapp">WhatsApp (com DDD)</label>
-          <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 91234-5678" autocomplete="tel" required>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 91234-5678" autocomplete="tel" inputmode="numeric" maxlength="15" required>
         </div>
 
         <div class="field">
@@ -289,6 +289,20 @@
   function normalizePhone(v){
     return v.replace(/\D/g, "");
   }
+
+  function maskPhone(value){
+    let digits = value.replace(/\D/g, "").slice(0, 11);
+    if (digits.length === 0) return "";
+    if (digits.length <= 2) return `(${digits}`;
+    if (digits.length <= 6) return `(${digits.slice(0,2)}) ${digits.slice(2)}`;
+    if (digits.length <= 10) return `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
+    return `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7)}`;
+  }
+
+  const whatsappInput = document.getElementById("whatsapp");
+  whatsappInput.addEventListener("input", (e) => {
+    e.target.value = maskPhone(e.target.value);
+  });
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
